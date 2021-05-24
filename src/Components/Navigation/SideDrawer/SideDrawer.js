@@ -4,7 +4,7 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import './SideDrawer.css';
 import Aux from '../../../hoc/hoc';
 import Backdrop from '../../UI/Backdrop/Backdrop';
-const SideDrawer = ({closeSideDrawer,show}) => {
+const SideDrawer = ({closeSideDrawer,show,isAuthenticated}) => {
     let classes = ['SideDrawer'];
         show ? classes = [...classes,'open'] : classes = [...classes,'close'];
     return (
@@ -15,7 +15,7 @@ const SideDrawer = ({closeSideDrawer,show}) => {
                     <Logo />
                 </div>
                 <nav>
-                    <NavigationItems />
+                    <NavigationItems isAuthenticated={isAuthenticated}/>
                 </nav>
             </div>
         </Aux>

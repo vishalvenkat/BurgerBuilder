@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import './Toolbar.css'
-const Toolbar = ({openSideDraw}) => {
+const Toolbar = ({openSideDraw,isAuthenticated}) => {
     return (
         <header className="Toolbar">
             <div onClick={openSideDraw} className="DrawerToggle">
@@ -15,7 +15,7 @@ const Toolbar = ({openSideDraw}) => {
             </div>
                 
             <nav className="DesktopOnly">
-                <NavigationItems />
+                <NavigationItems isAuthenticated={isAuthenticated}/>
             </nav>
         </header>
     );

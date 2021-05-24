@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import Aux from '../../hoc/hoc';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
+import {connect} from 'react-redux';
 import './Layout.css';
 
-const Layout = ({children}) => {
-    const [open, setOpen] = useState(false);
-    const openSideDrawer = () => {
-        setOpen(true)
+class Layout extends Component {
+    state = {
+        openDrawer: false
     }
-    const closeSideDrawer = () => {
-        setOpen(false)
+     openSideDrawer = () => {
+        this.setState({openDrawer: true})
     }
-    
+     closeSideDrawer = () => {
+        this.setState({openDrawer: false})
+    }
+    render() {
     return (
         <Aux>
-            <Toolbar openSideDraw={openSideDrawer}/>
-            <SideDrawer show={open} closeSideDrawer={closeSideDrawer}/>
+            <Toolbar openSideDraw={this.openSideDrawer} isAuthenticated={this.props.isAuthenticated}/>
+            <SideDrawer show={this.state.openDrawer} closeSideDrawer={this.closeSideDrawer} isAuthenticated={this.props.isAuthenticated}/>
             <main className="content">
-                {children} 
+                {this.props.children} 
             </main>
         </Aux>
     )
 }
-export default Layout;
+}
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.authReducer.token !== null
+    }
+}
+export default connect(mapStateToProps)(Layout);

@@ -3,7 +3,8 @@ import {update} from '../utitlity';
 const initialState = {
     ingredients: null,
     totalPrice: 0,
-    error: false
+    error: false,
+    building: false
 }
 
 
@@ -25,7 +26,8 @@ const addIngredient = (state,action) => {
         });
         const updatedState = {
             ingredients: updatedIngredients,
-            totalPrice: state.totalPrice + Action.INGREDIENT_PRICES[action.ingredient]
+            totalPrice: state.totalPrice + Action.INGREDIENT_PRICES[action.ingredient],
+             building: true
         }
         return update(state, updatedState);
 }
@@ -37,7 +39,8 @@ const removeIngredient = (state,action) => {
         });
         const updatedState = {
             ingredients: updatedIngredients,
-            totalPrice: state.totalPrice - Action.INGREDIENT_PRICES[action.ingredient]
+            totalPrice: state.totalPrice - Action.INGREDIENT_PRICES[action.ingredient],
+            building: true
         }
         return update(state, updatedState);
 }
@@ -46,7 +49,8 @@ const setIngredient = (state, action) => {
     return update(state,{
         ingredients : action.ingredient,
         error: false,
-        totalPrice: 0
+        totalPrice: 0,
+        building: false
     })
 }
 
