@@ -10,7 +10,7 @@ const SideDrawer = ({closeSideDrawer,show,isAuthenticated}) => {
     return (
         <Aux>
             <Backdrop show={show} closeModal={closeSideDrawer}/>
-            <div className={classes.join(' ')}>
+            <div className={classes.join(' ')} onClick={closeSideDrawer}>
                 <div className="Logo">
                     <Logo />
                 </div>

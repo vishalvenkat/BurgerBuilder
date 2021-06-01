@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
+import React, {  useEffect } from 'react';
 import Order from '../../Components/Order/Order';
 import Spinner from '../../Components/UI/Spinners/Spinner';
 import { connect } from 'react-redux'
 import { fetchOrder } from '../../Store/actions/order';
-class Orders extends Component {
+const Orders = props => {
 
-    componentDidMount() {
-        this.props.fetchOrder(this.props.token, this.props.userId);
-    }
-    render() {
+    const {token, userId, fetchOrder} = props;
+    useEffect(() => fetchOrder(token, userId), [token, userId, fetchOrder]);
         let loader = <div>
-                        {this.props.orders.map(order =>
-                         <Order key={order.id} ingredients={order.ingredient} price={order.price}/>
+                        {props.orders.map(order =>
+                         <Order 
+                                key={order.id}
+                                ingredients={order.ingredient} 
+                                price={order.price}/>
                         )}
                     </div>
 
-        if(this.props.loading) loader = <Spinner />
+        if(props.loading) loader = <Spinner />
         return (
             <div>
                 {loader}
             </div>
          );
     }
-}
+
 
 
 
